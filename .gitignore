@@ -1,0 +1,7 @@
+venv/ 
+__pycache__/ 
+*.pyc 
+*.zip 
+*.mp4 
+*.pkl 
+.DS_Store 
