@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Konsultan Hukum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="haru-fixed-left-container"> 
+        <header class="app-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo AI Konsultan Hukum" class="logo">
+            <h1>AI Konsultan Hukum</h1>
+            <p class="tagline">Temukan jawaban hukum terbaik dengan teknologi AI</p>
+        </header>
+        <div class="haru-fixed-left-buttons">
+            <button type="button" id="mic-button-fixed" class="submit-button"> Tanya Lewat Suara</button> 
+            <button id="show-question-box" class="submit-button show-box-button">Tampilkan Question Box</button>
+        </div>
+    </div> <div class="main-content">
+        <div class="haru-wrapper">
+             <canvas id="live2d-canvas" class="avatar-canvas"></canvas>
+        </div>
+        
+        <main id="question-box-container" style="display: none;">
+            <form method="POST" class="form">
+                <div class="form-group">
+                    <label for="question-input" class="sr-only">Tulis pertanyaan hukum Anda</label>
+                    <textarea id="question-input" name="question" rows="5" placeholder="Tulis pertanyaan hukum Anda di sini" required>{{ query }}</textarea>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" id="mic-button" class="submit-button">Tanya Lewat Suara</button>
+                    <button type="submit" class="submit-button">Tanyakan ke Haru</button>
+                    <button type="button" id="stop-button" class="submit-button stop-mode" style="display: none;">⛔ Stop</button>
+                </div>
+            </form>
+            
+            {% if hasil %}
+            <section class="hasil">
+                <h2><span class="icon">✨</span> Hasil Konsultasi</h2>
+                {% for item in hasil %}
+                {% if item.dokumen == "Gemini AI" %}
+                    <div class="jawaban card" style="background: #fff8e1; border-left: 6px solid #ffc107;">
+                        <div class="card-body">
+                            <h3 style="color: #ff9800;">RANGKUMAN JAWABAN</h3>
+                            <p class="content-text" style="color: #333;">{{ item.teks|safe }}</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="jawaban card">
+                        <div class="card-header">
+                            <p class="meta-info"><strong>📚 Dokumen:</strong> {{ item.dokumen }}</p>
+                            <p class="meta-info"><strong>⚖️ Jenis Hukum:</strong> {{ item.jenis_hukum }}</p>
+                            <p class="meta-info"><strong>🔖 Topik:</strong> {{ item.topik }}</p>
+                        </div>
+                        <div class="card-body">
+                            <h3>{{ item.get("judul", "Judul Tidak Tersedia") }}</h3>
+                            <p class="content-text">{{ item.teks|safe }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </section>
+            {% endif %}
+        </main>
+    </div>
+    <body>
+    <div id="loading-overlay">
+        <div id="loading"></div>
+        <div id="haru-thinking">Haru Thinking...</div>
+    </div>
+
+    <script src="path/to/script.js"></script>
+</body>
+    <footer class="app-footer">
+        <p>&copy; 2025 AI Konsultan Hukum. All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div id="haru-bubble" class="chat-bubble" style="display: none;"></div>
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    <script src="https://unpkg.com/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/extra.min.js"></script>
+
+    <script src="https://unpkg.com/pixi.js@5.3.3/dist/pixi.min.js"></script>
+    <script src="https://unpkg.com/pixi-live2d-display@0.4.0/dist/index.min.js"></script>
+
+    <script>
+        async function loadHaru() {
+            const app = new PIXI.Application({
+                view: document.getElementById("live2d-canvas"),
+                autoStart: true,
+                transparent: true,
+                width: 1300,
+                height: 800,
+            });
+
+            const model = await PIXI.live2d.Live2DModel.from(
+                "{{ url_for('static', filename='live2d/model/Haru/Haru.model3.json') }}"
+            );
+
+            model.scale.set(0.45);
+            // Posisi Haru akan diatur oleh CSS
+            app.stage.addChild(model);
+            window.live2dModel = model;
+
+            const event = new Event('live2dModelLoaded');
+            window.dispatchEvent(event);
+        }
+        loadHaru();
+    </script>
+</body>
+</html>
