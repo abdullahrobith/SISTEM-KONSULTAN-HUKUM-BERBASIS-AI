@@ -24,14 +24,15 @@
             <h1>AI Konsultan Hukum</h1>
             <p class="tagline">Temukan jawaban hukum terbaik dengan teknologi AI</p>
         </header>
-
         <div class="haru-fixed-left-buttons">
-            <button type="button" id="mic-button-fixed" class="submit-button">
-                <img src="https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png" alt="Tanya Lewat Suara" style="width: 24px; height: 24px;">
+            <button type="button" id="mic-button-fixed" class="submit-button" style="margin-top: -5px;">
+                <img src="https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png" alt="Tanya Lewat Suara" style="width: 24px; height: 24px; vertical-align: middle;margin-bottom: 10px;"> Pesan Suara
             </button>
-
-            <button id="show-question-box" class="submit-button show-box-button">Tampilkan Question Box</button>
+            <button id="show-question-box" class="submit-button show-box-button" style="margin-top: -5px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/14/14558.png" alt="Tanya Lewat Pesan" style="width: 24px; height: 24px; vertical-align: middle;"> Pesan Teks
+            </button>
         </div>
+
     </div>
 
     <!-- ✅ Form Pertanyaan -->
@@ -66,29 +67,31 @@
         <!-- ✅ Hasil Jawaban -->
         {% if hasil %}
         <section class="hasil">
-            <h2><span class="icon">✨</span> Hasil Konsultasi</h2>
+        <h2><span class="icon">✨</span> Hasil Konsultasi</h2>
+        <div class="hasil-scroll-container">
             {% for item in hasil %}
-                {% if item.dokumen == "Gemini AI" %}
-                    <div class="jawaban card" style="background: #fff8e1; border-left: 6px solid #ffc107;">
-                        <div class="card-body">
-                            <h3 style="color: #ff9800;">RANGKUMAN JAWABAN</h3>
-                            <p class="content-text" style="color: #333;">{{ item.teks|safe }}</p>
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="jawaban card">
-                        <div class="card-header">
-                            <p class="meta-info"><strong>📚 Dokumen:</strong> {{ item.dokumen }}</p>
-                            <p class="meta-info"><strong>⚖️ Jenis Hukum:</strong> {{ item.jenis_hukum }}</p>
-                            <p class="meta-info"><strong>🔖 Topik:</strong> {{ item.topik }}</p>
-                        </div>
-                        <div class="card-body">
-                            <h3>{{ item.get("judul", "Judul Tidak Tersedia") }}</h3>
-                            <p class="content-text">{{ item.teks|safe }}</p>
-                        </div>
-                    </div>
-                {% endif %}
+            {% if item.dokumen == "Gemini AI" %}
+                <div class="jawaban card ai-card">
+                <div class="card-body">
+                    <h3>RANGKUMAN JAWABAN</h3>
+                    <p class="content-text">{{ item.teks|safe }}</p>
+                </div>
+                </div>
+            {% else %}
+                <div class="jawaban card user-card">
+                <div class="card-header">
+                    <p class="meta-info"><strong>📚 Dokumen:</strong> {{ item.dokumen }}</p>
+                    <p class="meta-info"><strong>⚖️ Jenis Hukum:</strong> {{ item.jenis_hukum }}</p>
+                    <p class="meta-info"><strong>🔖 Topik:</strong> {{ item.topik }}</p>
+                </div>
+                <div class="card-body">
+                    <h3>{{ item.get("judul", "Judul Tidak Tersedia") }}</h3>
+                    <p class="content-text">{{ item.teks|safe }}</p>
+                </div>
+                </div>
+            {% endif %}
             {% endfor %}
+        </div>
         </section>
 
         {% endif %}
@@ -129,12 +132,25 @@ document.addEventListener("DOMContentLoaded", function () {
         questionBox.style.display = "block";
     });
 
-    // Ganti tombol X agar me-reload halaman
     closeBtn.addEventListener("click", function () {
-        location.reload(); // 🔄 Reload halaman
+        // 1. Stop semua <audio> dan <video>
+        const mediaElements = document.querySelectorAll('audio, video');
+        mediaElements.forEach(el => {
+            el.pause();
+            el.currentTime = 0;
+        });
+
+        // 2. Stop Web Speech API (text-to-speech)
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+        }
+
+        // 3. Reload ulang halaman
+        window.location.href = window.location.href;
     });
 });
 </script>
+
 
 
 
