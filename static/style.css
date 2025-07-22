@@ -873,3 +873,62 @@ section.hasil h2 {
   color: #ffc107;
   font-size: 1.1rem;
 }
+
+
+
+.cloud {
+  position: fixed;
+  bottom: -45px; /* diturunkan sedikit */
+  left: 0;
+  width: 300px;
+  height: 200px;
+  background: url('https://img.pikbest.com/png-images/20250209/elegant-fog-white-cloud-depicted-on-a-transparent-background_11508848.png!bw700') no-repeat center center / contain;
+  z-index: 9;
+  opacity: 0.8;
+  animation: cloudFloat 25s linear infinite;
+  pointer-events: none;
+}
+
+.cloud1 {
+  position: fixed;
+  bottom: -50px; /* diturunkan sedikit */
+  left: 0;
+  width: 900px;
+  height: 200px;
+  background: url('https://img.pikbest.com/png-images/20250209/elegant-fog-white-cloud-depicted-on-a-transparent-background_11508848.png!bw700') no-repeat center center / contain;
+  z-index: 9;
+  opacity: 0.8;
+  animation: cloudFloat 25s linear infinite;
+  pointer-events: none;
+}
+
+.cloud2 {
+  position: fixed;
+  bottom: -40px; /* diturunkan sedikit */
+  left: 0;
+  width: 600px;
+  height: 200px;
+  background: url('https://img.pikbest.com/png-images/20250209/elegant-fog-white-cloud-depicted-on-a-transparent-background_11508848.png!bw700') no-repeat center center / contain;
+  z-index: 9;
+  opacity: 0.8;
+  animation: cloudFloat 25s linear infinite;
+  pointer-events: none;
+}
+
+
+@media (min-width: 1025px) {
+  .cloud,
+  .cloud1,
+  .cloud2 {
+    display: block;
+  }
+}
+
+/* Sembunyikan cloud di layar kecil */
+@media (max-width: 1524px) {
+  .cloud,
+  .cloud1,
+  .cloud2 {
+    display: none;
+  }
+}
