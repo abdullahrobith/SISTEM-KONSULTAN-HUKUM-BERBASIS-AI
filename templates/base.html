@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Legita{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='images/logoBrand.png') }}" alt="Legita Logo" style="height: 40px;"> 
+                    <p>LEGITA</p>
+                </a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Beranda</a></li>
+                <li><a href="/#layanan">Layanan</a></li>
+                <li><a href="/#tentang">Tentang</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="pt-16">{% block content %}{% endblock %}</main>
+
+    
+    {% block scripts %}{% endblock %}
+    <script>
+      // Script global, contoh: hamburger menu
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+        if(hamburger && navLinks) {
+            hamburger.addEventListener("click", () => {
+                navLinks.classList.toggle("active");
+                hamburger.classList.toggle("active");
+            });
+        }
+      });
+    </script>
+</body>
+</html>

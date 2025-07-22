@@ -1,0 +1,154 @@
+           * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .logo::before {
+            content: '';
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: #ffd700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        
+        /* Hamburger menu (hidden on desktop) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            z-index: 1001;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #ffd700;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                height: 100vh;
+                width: 200px;
+                background: rgba(26, 26, 46, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+/* Ganti/tambahkan aturan .logo di file CSS Anda (misal: base.css) */
+
+.logo a {
+  display: flex;
+  align-items: center; /* Membuat gambar dan teks sejajar secara vertikal */
+  gap: 12px;           /* Memberi jarak antara gambar dan teks */
+  text-decoration: none; /* Menghapus garis bawah dari link */
+}
+
+.logo a img {
+  height: 40px;
+  width: auto;
+
+}
+
+.logo a p {
+  font-size: 1.6rem; /* Ukuran teks "LEGITA" */
+  font-weight: 700;
+  margin: -10; /* Menghapus margin default pada tag <p> */
+  color: #ffc107; /* Fallback color */
+  
+  /* Efek gradien pada teks */
+  background: linear-gradient(45deg, #ffdd57, #ffc107);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Efek glow halus */
+  text-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+}
+
+

@@ -1,61 +1,73 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Konsultan Hukum</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Legita</div>
-            <ul class="nav-links">
-                <li><a href="/">Beranda</a></li>
-                <li><a href="/#layanan">Layanan</a></li>
-                <li><a href="/#tentang">Tentang</a></li>
-                <li><a href="/#kontak">Kontak</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="overlay"></div>
+{% extends 'base.html' %}
 
-    
-    <div class="haru-fixed-left-container"> 
+{% block title %}Konsultasi Hukum - Legita{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<header class="app-header" id="app-header">
+
+
+<!-- Kolom kiri: hanya untuk Haru -->
+<div class="haru-wrapper">
+    <canvas id="live2d-canvas" class="avatar-canvas"></canvas>
+</div>
+<div class="main-content">
+
+    <!-- ✅ Header dan Tombol -->
+    <div class="haru-fixed-right-container" id="haru-fixed-container">
         <header class="app-header">
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo AI Konsultan Hukum" class="logo">
             <h1>AI Konsultan Hukum</h1>
             <p class="tagline">Temukan jawaban hukum terbaik dengan teknologi AI</p>
         </header>
+
         <div class="haru-fixed-left-buttons">
-            <button type="button" id="mic-button-fixed" class="submit-button"> Tanya Lewat Suara</button> 
+            <button type="button" id="mic-button-fixed" class="submit-button">
+                <img src="https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png" alt="Tanya Lewat Suara" style="width: 24px; height: 24px;">
+            </button>
+
             <button id="show-question-box" class="submit-button show-box-button">Tampilkan Question Box</button>
         </div>
-        
-    </div> <div class="main-content">
-        <div class="haru-wrapper">
-             <canvas id="live2d-canvas" class="avatar-canvas"></canvas>
-        </div>
-        
-        <main id="question-box-container" style="display: none;">
-            <form method="POST" class="form">
-                <div class="form-group">
-                    <label for="question-input" class="sr-only">Tulis pertanyaan hukum Anda</label>
-                    <textarea id="question-input" name="question" rows="5" placeholder="Tulis pertanyaan hukum Anda di sini" required>{{ query }}</textarea>
-                </div>
-                
-                <div class="button-group">
-                    <button type="button" id="mic-button" class="submit-button">Tanya Lewat Suara</button>
-                    <button type="submit" class="submit-button">Tanyakan ke Haru</button>
-                    <button type="button" id="stop-button" class="submit-button stop-mode" style="display: none;">⛔ Stop</button>
-                </div>
-            </form>
-            
-            {% if hasil %}
-            <section class="hasil">
-                <h2><span class="icon">✨</span> Hasil Konsultasi</h2>
-                {% for item in hasil %}
+    </div>
+
+    <!-- ✅ Form Pertanyaan -->
+    <main id="question-box-container" style="display: none; position: relative;">
+        <!-- Tombol ❌ -->
+        <button type="button" id="close-question-box" style="
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;">✖</button>
+
+        <!-- Form Input -->
+        <form method="POST" class="form">
+            <div class="form-group">
+                <label for="question-input" class="sr-only">Tulis pertanyaan hukum Anda</label>
+                <textarea id="question-input" name="question" rows="5" placeholder="Tulis pertanyaan hukum Anda di sini" required>{{ query }}</textarea>
+            </div>
+
+            <div class="button-group">
+                <button type="button" id="mic-button" class="submit-button">
+                    <img src="https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png" alt="Tanya Lewat Suara" style="width: 24px; height: 24px;">
+                </button>
+                <button type="submit" class="submit-button">Tanyakan ke Haru</button>
+                <button type="button" id="stop-button" class="submit-button stop-mode" style="display: none;">⛔ Stop</button>
+            </div>
+        </form>
+    <br>
+        <!-- ✅ Hasil Jawaban -->
+        {% if hasil %}
+        <section class="hasil">
+            <h2><span class="icon">✨</span> Hasil Konsultasi</h2>
+            {% for item in hasil %}
                 {% if item.dokumen == "Gemini AI" %}
                     <div class="jawaban card" style="background: #fff8e1; border-left: 6px solid #ffc107;">
                         <div class="card-body">
@@ -76,53 +88,76 @@
                         </div>
                     </div>
                 {% endif %}
-                {% endfor %}
-            </section>
-            {% endif %}
-        </main>
-    </div>
-    <body>
-    <div id="loading-overlay">
-        <div id="loading"></div>
-        <div id="haru-thinking">Haru Thinking...</div>
-    </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+    </main>
+</div>
 
-    <script src="path/to/script.js"></script>
-</body>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <div id="haru-bubble" class="chat-bubble" style="display: none;"></div>
-    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
-    <script src="https://unpkg.com/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/extra.min.js"></script>
+</div>
 
-    <script src="https://unpkg.com/pixi.js@5.3.3/dist/pixi.min.js"></script>
-    <script src="https://unpkg.com/pixi-live2d-display@0.4.0/dist/index.min.js"></script>
+<!-- Overlay Thinking -->
+<div id="loading-overlay">
+    <div id="loading"></div>
+    <div id="haru-thinking">Haru Thinking...</div>
+</div>
 
-    <script>
-        async function loadHaru() {
-            const app = new PIXI.Application({
-                view: document.getElementById("live2d-canvas"),
-                autoStart: true,
-                transparent: true,
-                width: 1300,
-                height: 800,
-            });
+<!-- Bubble -->
+<div id="haru-bubble" class="chat-bubble" style="display: none;"></div>
+{% endblock %}
 
-            const model = await PIXI.live2d.Live2DModel.from(
-                "{{ url_for('static', filename='live2d/model/Haru/Haru.model3.json') }}"
-            );
+{% block scripts %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+<script src="https://unpkg.com/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/extra.min.js"></script>
 
-            model.scale.set(0.45);
-            // Posisi Haru akan diatur oleh CSS
-            app.stage.addChild(model);
-            window.live2dModel = model;
 
-            const event = new Event('live2dModelLoaded');
-            window.dispatchEvent(event);
-        }
-        loadHaru();
-    </script>
-</body>
-</html>
+<!-- ✅ Script untuk Toggle -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const showBtn = document.getElementById("show-question-box");
+    const closeBtn = document.getElementById("close-question-box");
+    const haruContainer = document.getElementById("haru-fixed-container");
+    const questionBox = document.getElementById("question-box-container");
+
+    showBtn.addEventListener("click", function () {
+        haruContainer.style.display = "none";
+        questionBox.style.display = "block";
+    });
+
+    // Ganti tombol X agar me-reload halaman
+    closeBtn.addEventListener("click", function () {
+        location.reload(); // 🔄 Reload halaman
+    });
+});
+</script>
+
+
+
+<script>
+    async function loadHaru() {
+        const app = new PIXI.Application({
+            view: document.getElementById("live2d-canvas"),
+            autoStart: true,
+            transparent: true,
+            width: 1300,
+            height: 800,
+        });
+
+        const model = await PIXI.live2d.Live2DModel.from(
+            "{{ url_for('static', filename='live2d/model/Haru/Haru.model3.json') }}"
+        );
+
+        model.scale.set(0.45);
+        app.stage.addChild(model);
+        window.live2dModel = model;
+
+        const event = new Event('live2dModelLoaded');
+        window.dispatchEvent(event);
+    }
+    loadHaru();
+</script>
+{% endblock %}

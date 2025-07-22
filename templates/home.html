@@ -1,92 +1,10 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legita - Konsultan Hukum Terpercaya</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+{% extends 'base.html' %}
 
-        body {
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+{% block title %}Home - Legita{% endblock %}
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 2rem;
-            transition: all 0.3s ease;
-        }
+{% block head %}
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #ffd700, #ffed4a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-        }
-
-        .logo::before {
-            content: '';
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: #ffd700;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #ffd700;
-            transform: translateY(-2px);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(45deg, #ffd700, #ffed4a);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
+<style>
         /* Hero Section */
         .hero {
     display: flex;
@@ -122,17 +40,24 @@
 
 .cta-button {
     display: inline-block;
-    background-color: #ffd700;
-    color: rgba(26, 26, 46, 0.95);
+    background: linear-gradient(90deg, #fff200, #fffb7d, #ffffff, #fff200);
+    background-size: 300% auto;
+    background-position: 0% 0%;
+    animation: slideRight 4s linear infinite;
+
+    color: #1a1a2e;
     padding: 14px 32px;
     border-radius: 12px;
     font-size: 1.1rem;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 20px rgba(255, 255, 150, 0.6);
+    transition: transform 0.3s ease;
 }
 
 .cta-button:hover {
-    background-color: #ffd700;
+    transform: scale(1.08);
+    box-shadow: 0 6px 25px rgba(255, 255, 180, 0.8);
 }
 
 .hero-right {
@@ -146,6 +71,15 @@
     max-width: 100%;
     width: 500px;
     animation: float 6s ease-in-out infinite;
+}
+
+@keyframes slideRight {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 300% 0%;
+    }
 }
 
 @keyframes float {
@@ -344,9 +278,9 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
+            /* .nav-links {
                 display: none;
-            }
+            } */
 
             .hero h1 {
                 font-size: 2.5rem;
@@ -405,9 +339,21 @@
                 transform: translateY(-100px) rotate(360deg);
             }
         }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
-</head>
-<body>
+    {% endblock %}
+
+    {% block content %}
     <div class="floating-elements">
         <div class="floating-element" style="left: 10%; animation-delay: 0s;">🤖</div>
         <div class="floating-element" style="left: 20%; animation-delay: 2s;">⚖️</div>
@@ -416,18 +362,6 @@
         <div class="floating-element" style="left: 80%; animation-delay: 8s;">🎯</div>
         <div class="floating-element" style="left: 90%; animation-delay: 10s;">🔒</div>
     </div>
-
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Legita</div>
-            <ul class="nav-links">
-                <li><a href="/">Beranda</a></li>
-                <li><a href="/#layanan">Layanan</a></li>
-                <li><a href="/#tentang">Tentang</a></li>
-                <li><a href="/#kontak">Kontak</a></li>
-            </ul>
-        </div>
-    </nav>
 
     <section class="hero" id="home">
         <div class="hero-left">
@@ -446,7 +380,8 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon"></div>
-                    <h3>Konsultasi AI 24/7</h3>
+                    <!-- <h3>Konsultasi AI 24/7</h3> -->
+                    <h3>Konsultasi AI</h3>
                     <p>Dapatkan jawaban hukum instan dengan teknologi AI terdepan yang tersedia 24 jam setiap hari untuk membantu permasalahan hukum Anda.</p>
                 </div>
                 <div class="service-card">
@@ -482,11 +417,11 @@
         <div class="container">
             <div class="features-content">
                 <div class="features-text">
-                    <h2>Mengapa Memilih AI Konsultan Hukum?</h2>
+                    <h2>Mengapa Memilih Legita?</h2>
                     <ul class="feature-list">
                         <li>Teknologi AI terdepan dengan akurasi tinggi</li>
                         <li>Respon instan 24/7 tanpa perlu menunggu</li>
-                        <li>Database hukum Indonesia terlengkap dan terkini</li>
+                        <!-- <li>Database hukum Indonesia terlengkap dan terkini</li> -->
                         <li>Fitur konsultasi suara yang mudah digunakan</li>
                         <li>Analisis mendalam dengan referensi lengkap</li>
                         <li>Interface yang user-friendly dan intuitif</li>
@@ -515,41 +450,24 @@
     </section>
 
     <footer id="kontak">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Hubungi Kami</h3>
-                <p>AI Support 24/7</p>
-                <p>support@aikonsultanhukum.id</p>
-                <p>Politeknik Harapan Bersama, Tegal</p>
-            </div>
-            <div class="footer-section">
-                <h3>Fitur AI</h3>
-                <a href="#">Konsultasi Teks</a>
-                <a href="#">Konsultasi Suara</a>
-                <a href="#">Analisis Dokumen</a>
-                <a href="#">Database Hukum</a>
-            </div>
-            <div class="footer-section">
-                <h3>Tentang AI</h3>
-                <a href="#">Cara Kerja AI</a>
-                <a href="#">Akurasi System</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-            </div>
-            <div class="footer-section">
-                <h3>Ikuti Kami</h3>
-                <a href="#">LinkedIn</a>
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
-            </div>
-        </div>
         <div class="footer-bottom">
             <p>&copy; 2025 AI Konsultan Hukum. Semua hak cipta dilindungi undang-undang.</p>
         </div>
     </footer>
 
+    
+    {% endblock %}
+
+    
+    {% block scripts %}
     <script>
+
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -620,57 +538,7 @@
     });
 
     statNumbers.forEach(stat => statsObserver.observe(stat));
-
-        // // stats
-        // const statNumbers = document.querySelectorAll('.stat-number');
-
-        // const statsObserver = new IntersectionObserver((entries) => {
-        // entries.forEach(entry => {
-        //     if (entry.isIntersecting) {
-        //     const target = entry.target;
-
-        //     if (target.dataset.animated) return; // Cegah animasi ulang
-        //     target.dataset.animated = 'true';
-
-        //     const original = target.textContent;
-
-        //     // Ambil angka numerik awal (misalnya: 24 dari 24/7 atau 95 dari 95%)
-        //     const match = original.match(/(\d+)/);
-        //     if (!match) return;
-
-        //     const finalValue = parseInt(match[1], 10);
-        //     const suffix = original.replace(match[1], ''); // Sisakan "/7", "%", dll
-
-        //     let current = 0;
-        //     const increment = Math.ceil(finalValue / 50);
-
-        //     const timer = setInterval(() => {
-        //         current += increment;
-        //         if (current >= finalValue) {
-        //         current = finalValue;
-        //         clearInterval(timer);
-        //         }
-        //         target.textContent = current + suffix;
-        //     }, 30);
-        //     }
-        // });
-        // });
-
-        // statNumbers.forEach(stat => statsObserver.observe(stat));
-
     </script>
 
-    <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-</body>
-</html>
+    
+{% endblock %}

@@ -52,12 +52,7 @@ Saya sedang membuat sistem konsultasi hukum. Pengguna menanyakan:
 Silakan berikan jawaban hukum yang sesuai dan jelas berdasarkan hukum positif di Indonesia. Sertakan penjelasan yang ringkas, tidak terlalu kaku, dan mudah dipahami oleh masyarakat awam.
 
 Tampilkan hasil akhir dalam format:
-
-📚 Dokumen: [contoh: KUHP atau sumber relevan jika diketahui]  
-⚖️ Jenis Hukum: [misalnya: Hukum Pidana]  
-🔖 Topik: [misalnya: Penipuan]  
-Judul: [Judul ringkas atau pasal]  
-Isi:  
+ 
 [Penjelasan akhir yang sudah disempurnakan dan relevan]
 
 Jangan menyebutkan bahwa kamu AI. Hindari menggunakan format Markdown (tidak perlu **bold**, *italic*, atau tanda bintang).
