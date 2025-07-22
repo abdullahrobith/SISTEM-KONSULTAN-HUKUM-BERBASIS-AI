@@ -1,0 +1,94 @@
+@media (max-width: 768px) {
+  .avatar-canvas {
+    position: fixed;
+    bottom: 0;
+    left: -50px;
+    margin: 0;
+    width: 500px;            /* Lebih besar dari sebelumnya */
+    height: auto;
+    max-width: none;         /* Tidak dibatasi lebar maksimum */
+    z-index: 999999 !important;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-canvas {
+    position: fixed;
+    bottom: -40px;
+    left: -150px;
+    margin: 0;
+    width: 1000px;           /* Lebih besar untuk layar kecil */
+    height: auto;
+    max-width: none;         /* Supaya tidak dibatasi layar */
+    z-index: 999999 !important;
+    pointer-events: none;
+  }
+}
+
+
+/* Responsif untuk tablet */
+@media (max-width: 768px) {
+  #question-box-container {
+    width: 95vw;
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    left: 1%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Responsif untuk HP kecil */
+@media (max-width: 480px) {
+  #question-box-container {
+    width: 98vw;
+    padding: 1rem;
+    font-size: 0.9rem;
+    border-radius: 12px;
+    left: 1%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    margin-right: 40px;
+    margin: 8px -2px;
+    margin-top: 30px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .haru-fixed-left-buttons button {
+    flex: 1 1 45%;           /* Maks 2 tombol per baris */
+    min-width: unset;
+    max-width: unset;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .button-group {
+    justify-content: center;      /* Tengah */
+    gap: 15px;
+    padding: 0 10px;              /* Spasi kanan kiri */
+  }
+
+  .submit-button {
+    width: 100%;                  /* Penuhi baris */
+    max-width: 300px;             /* Batasi ukuran agar tidak terlalu lebar */
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-group {
+    justify-content: center;
+    gap: 10px;
+    padding: 0 5px;
+  }
+
+  .submit-button {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+}
