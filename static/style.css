@@ -31,6 +31,81 @@ body {
     grid-template-areas: "fixed-left-area main-area";
 }
 
+
+
+/* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 40;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding-right: 2rem; 
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .logo::before {
+            content: '';
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: #ffd700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -68,6 +143,7 @@ body {
 /* Header di dalam container fixed */
 .app-header {
     margin-bottom: 30px;
+    padding-top: 170px;
     padding-bottom: 20px;
     width: 100%;
 }
@@ -107,7 +183,7 @@ h1 {
     justify-content: center; /* Pusatkan tombol-tombol di dalam grup mereka */
     align-items: center; /* Pusatkan secara vertikal jika tinggi tombol berbeda */
     gap: 15px; /* Jarak antar tombol */
-    margin-top: 20px; /* Jarak dari tagline di atasnya */
+    margin-top: -70px; /* Jarak dari tagline di atasnya */
     width: 100%; /* Ambil lebar penuh yang tersedia dari parent-nya */
     flex-wrap: wrap; /* Izinkan tombol wrap jika ruang terlalu sempit */
     /* background-color: rgba(0, 255, 0, 0.2); /* Debugging, hapus nanti */
@@ -138,6 +214,7 @@ h1 {
     padding: 0 20px 80px 20px;
     min-height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     z-index: 1;
 }

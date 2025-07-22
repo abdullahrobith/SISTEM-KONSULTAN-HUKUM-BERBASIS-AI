@@ -8,8 +8,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Legita</div>
+            <ul class="nav-links">
+                <li><a href="/">Beranda</a></li>
+                <li><a href="/#layanan">Layanan</a></li>
+                <li><a href="/#tentang">Tentang</a></li>
+                <li><a href="/#kontak">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="overlay"></div>
 
+    
     <div class="haru-fixed-left-container"> 
         <header class="app-header">
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo AI Konsultan Hukum" class="logo">
@@ -20,6 +32,7 @@
             <button type="button" id="mic-button-fixed" class="submit-button"> Tanya Lewat Suara</button> 
             <button id="show-question-box" class="submit-button show-box-button">Tampilkan Question Box</button>
         </div>
+        
     </div> <div class="main-content">
         <div class="haru-wrapper">
              <canvas id="live2d-canvas" class="avatar-canvas"></canvas>
@@ -76,9 +89,6 @@
 
     <script src="path/to/script.js"></script>
 </body>
-    <footer class="app-footer">
-        <p>&copy; 2025 AI Konsultan Hukum. All rights reserved.</p>
-    </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <div id="haru-bubble" class="chat-bubble" style="display: none;"></div>
     <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>

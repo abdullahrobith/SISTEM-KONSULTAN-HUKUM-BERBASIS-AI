@@ -79,8 +79,12 @@ Jangan menyebutkan bahwa kamu AI. Hindari menggunakan format Markdown (tidak per
     except Exception:
         return None
 
+@app.route("/")
+def home():
+    return render_template("home.html")
+
 # ROUTE utama
-@app.route("/", methods=["GET", "POST"])
+@app.route("/konsultasi", methods=["GET", "POST"])
 def index():
     hasil = []
     query = ""
@@ -113,7 +117,7 @@ def index():
         if jawaban_gemini:
             hasil.insert(0, jawaban_gemini)
 
-    return render_template("index.html", query=query, hasil=hasil)
+    return render_template("konsul.html", query=query, hasil=hasil)
 
 # Main
 if __name__ == "__main__":

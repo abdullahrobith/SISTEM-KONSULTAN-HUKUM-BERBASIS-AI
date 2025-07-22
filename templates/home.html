@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legita - Konsultan Hukum Terpercaya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .logo::before {
+            content: '';
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: #ffd700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px 10%;
+            background: rgba(255, 255, 255, 0.05);
+    min-height: 100vh;
+    position: relative;
+    gap: 50px;
+}
+
+.hero-left {
+    flex: 1;
+    z-index: 2;
+    gap: 1.5rem;
+}
+
+.hero-left h1 {
+    font-size: 4rem;
+    color: #ffd700;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-left p {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #ffd700;
+    color: rgba(26, 26, 46, 0.95);
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ffd700;
+}
+
+.hero-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-right img {
+    max-width: 100%;
+    width: 500px;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-left, .hero-right {
+        max-width: 100%;
+    }
+
+    .hero-right img {
+        width: 80%;
+        margin-top: 30px;
+    }
+}
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .service-card p {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+        }
+
+        .features-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .features-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-list li::before {
+            content: '';
+            font-size: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #e0e0e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            padding-top: 1rem;
+            color: #a0a0a0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #ffed4a, #ffd700);
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            color: rgba(255, 215, 0, 0.1);
+            font-size: 2rem;
+            animation: floatAround 15s infinite linear;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="left: 10%; animation-delay: 0s;">🤖</div>
+        <div class="floating-element" style="left: 20%; animation-delay: 2s;">⚖️</div>
+        <div class="floating-element" style="left: 30%; animation-delay: 4s;">📚</div>
+        <div class="floating-element" style="left: 70%; animation-delay: 6s;">💬</div>
+        <div class="floating-element" style="left: 80%; animation-delay: 8s;">🎯</div>
+        <div class="floating-element" style="left: 90%; animation-delay: 10s;">🔒</div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Legita</div>
+            <ul class="nav-links">
+                <li><a href="/">Beranda</a></li>
+                <li><a href="/#layanan">Layanan</a></li>
+                <li><a href="/#tentang">Tentang</a></li>
+                <li><a href="/#kontak">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-left">
+            <h1>LEGITA</h1>
+            <p>Inovasi Asisten Digital Interaktif Berbasis AI untuk Konsultasi dan Edukasi Hukum Masyarakat</p>
+            <a href="/konsultasi" class="cta-button">Konsultasi Sekarang</a>
+        </div>
+        <div class="hero-right">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AI Legal Illustration">
+        </div>
+    </section>
+
+    <section class="services" id="layanan">
+        <div class="container">
+            <h2 class="section-title">Layanan AI Hukum Kami</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Konsultasi AI 24/7</h3>
+                    <p>Dapatkan jawaban hukum instan dengan teknologi AI terdepan yang tersedia 24 jam setiap hari untuk membantu permasalahan hukum Anda.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Analisis Hukum Mendalam</h3>
+                    <p>AI kami menganalisis kasus Anda berdasarkan database hukum Indonesia yang lengkap dan memberikan solusi yang tepat sasaran.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Database Hukum Terlengkap</h3>
+                    <p>Akses ke ribuan dokumen hukum, peraturan, dan studi kasus yang diperbarui secara real-time untuk analisis yang akurat.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Rekomendasi Personal</h3>
+                    <p>Setiap jawaban disesuaikan dengan konteks spesifik kasus Anda untuk memberikan solusi yang paling relevan dan aplikatif.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Konsultasi Suara</h3>
+                    <p>Fitur voice-to-text memungkinkan Anda bertanya dengan suara natural, membuat konsultasi hukum menjadi lebih mudah dan interaktif.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"></div>
+                    <h3>Keamanan Terjamin</h3>
+                    <p>Semua data konsultasi Anda dilindungi dengan enkripsi tingkat enterprise dan menjaga kerahasiaan informasi pribadi Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="tentang">
+        <div class="container">
+            <div class="features-content">
+                <div class="features-text">
+                    <h2>Mengapa Memilih AI Konsultan Hukum?</h2>
+                    <ul class="feature-list">
+                        <li>Teknologi AI terdepan dengan akurasi tinggi</li>
+                        <li>Respon instan 24/7 tanpa perlu menunggu</li>
+                        <li>Database hukum Indonesia terlengkap dan terkini</li>
+                        <li>Fitur konsultasi suara yang mudah digunakan</li>
+                        <li>Analisis mendalam dengan referensi lengkap</li>
+                        <li>Interface yang user-friendly dan intuitif</li>
+                    </ul>
+                </div>
+                <div class="stats">
+                    <!-- <div class="stat-card">
+                        <div class="stat-number">10K+</div>
+                        <div>Konsultasi Selesai</div>
+                    </div> -->
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div>Layanan AI Aktif</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">80%</div>
+                        <div>Tingkat Akurasi</div>
+                    </div>
+                    <!-- <div class="stat-card">
+                        <div class="stat-number">5000+</div>
+                        <div>Dokumen Hukum</div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hubungi Kami</h3>
+                <p>AI Support 24/7</p>
+                <p>support@aikonsultanhukum.id</p>
+                <p>Politeknik Harapan Bersama, Tegal</p>
+            </div>
+            <div class="footer-section">
+                <h3>Fitur AI</h3>
+                <a href="#">Konsultasi Teks</a>
+                <a href="#">Konsultasi Suara</a>
+                <a href="#">Analisis Dokumen</a>
+                <a href="#">Database Hukum</a>
+            </div>
+            <div class="footer-section">
+                <h3>Tentang AI</h3>
+                <a href="#">Cara Kerja AI</a>
+                <a href="#">Akurasi System</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="footer-section">
+                <h3>Ikuti Kami</h3>
+                <a href="#">LinkedIn</a>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AI Konsultan Hukum. Semua hak cipta dilindungi undang-undang.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Dynamic navbar background
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(26, 26, 46, 0.98)';
+            } else {
+                nav.style.background = 'rgba(26, 26, 46, 0.95)';
+            }
+        });
+
+        // Add floating animation to service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        });
+
+        serviceCards.forEach(card => {
+            observer.observe(card);
+        });
+
+        const statNumbers = document.querySelectorAll('.stat-number');
+
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+
+                // if (target.dataset.animated) return; // Cegah animasi ulang
+                // target.dataset.animated = 'true';
+
+                const original = target.textContent;
+
+                const match = original.match(/(\d+)/);
+                if (!match) return;
+
+                const finalValue = parseInt(match[1], 10);
+                const suffix = original.replace(match[1], '');
+
+                let current = 0;
+                const increment = Math.ceil(finalValue / 50);
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= finalValue) {
+                        current = finalValue;
+                        clearInterval(timer);
+                    }
+                    target.textContent = current + suffix;
+                }, 30);
+            }
+        });
+    }, {
+        threshold: 0.6 // Bisa disesuaikan agar animasi hanya dimulai jika 60% terlihat
+    });
+
+    statNumbers.forEach(stat => statsObserver.observe(stat));
+
+        // // stats
+        // const statNumbers = document.querySelectorAll('.stat-number');
+
+        // const statsObserver = new IntersectionObserver((entries) => {
+        // entries.forEach(entry => {
+        //     if (entry.isIntersecting) {
+        //     const target = entry.target;
+
+        //     if (target.dataset.animated) return; // Cegah animasi ulang
+        //     target.dataset.animated = 'true';
+
+        //     const original = target.textContent;
+
+        //     // Ambil angka numerik awal (misalnya: 24 dari 24/7 atau 95 dari 95%)
+        //     const match = original.match(/(\d+)/);
+        //     if (!match) return;
+
+        //     const finalValue = parseInt(match[1], 10);
+        //     const suffix = original.replace(match[1], ''); // Sisakan "/7", "%", dll
+
+        //     let current = 0;
+        //     const increment = Math.ceil(finalValue / 50);
+
+        //     const timer = setInterval(() => {
+        //         current += increment;
+        //         if (current >= finalValue) {
+        //         current = finalValue;
+        //         clearInterval(timer);
+        //         }
+        //         target.textContent = current + suffix;
+        //     }, 30);
+        //     }
+        // });
+        // });
+
+        // statNumbers.forEach(stat => statsObserver.observe(stat));
+
+    </script>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</body>
+</html>
